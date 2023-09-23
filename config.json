@@ -1,0 +1,5 @@
+{
+  "modelPackage": "br.com.thomasdacosta.model",
+  "apiPackage": "br.com.thomasdacosta.api",
+  "configPackage": "br.com.thomasdacosta.configuration"
+}
