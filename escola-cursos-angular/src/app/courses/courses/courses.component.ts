@@ -14,6 +14,7 @@ export class CoursesComponent {
 
   constructor(private coursesService: CoursesService) {
     this.courses = this.coursesService.list();
+
   }
 
 
