@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {Component} from '@angular/core';
+import {NonNullableFormBuilder} from "@angular/forms";
 import {CoursesService} from "../services/courses.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Location} from "@angular/common";
@@ -11,15 +11,15 @@ import {Location} from "@angular/common";
 })
 export class CourseFormComponent {
 
-  form: FormGroup;
-  constructor(private formsBuilder: FormBuilder,
+  form = this.formsBuilder.group({
+    name: [''],
+    category: ['']
+  })
+  constructor(private formsBuilder: NonNullableFormBuilder,
               private service: CoursesService,
               private snackBar: MatSnackBar,
               private location: Location) {
-    this.form = this.formsBuilder.group({
-      name: [null],
-      category: [null]
-    })
+
   }
 
   protected readonly onsubmit = onsubmit;
