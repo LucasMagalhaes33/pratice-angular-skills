@@ -27,10 +27,8 @@ export class CoursesService {
 
   save(record: Partial<Course>) {
     if (record._id) {
-      console.log('update')
       return this.update(record);
     }
-    console.log('create')
     return this.create(record);
   }
 
