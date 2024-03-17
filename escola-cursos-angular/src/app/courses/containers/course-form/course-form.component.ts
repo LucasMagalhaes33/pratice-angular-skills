@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FormGroup, NonNullableFormBuilder, Validators} from "@angular/forms";
+import {FormGroup, NonNullableFormBuilder, UntypedFormArray, Validators} from "@angular/forms";
 import {CoursesService} from "../../services/courses.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Location} from "@angular/common";
@@ -29,8 +29,7 @@ export class CourseFormComponent {
       category: [course.category, [Validators.required]],
       lessons: this.formsBuilder.array(this.retrieveLessons(course))
     });
-    console.log(this.form);
-    console.log(this.form.value);
+
   }
 
   private retrieveLessons(course: Course) {
@@ -53,6 +52,10 @@ export class CourseFormComponent {
       name: [lesson.name, [Validators.required]],
       youtubeUrl: [lesson.youtubeUrl, [Validators.required]]
     });
+  }
+
+  getLessonsFormArray() {
+    return (<UntypedFormArray>this.form.get('lessons')).controls;
   }
 
   onCancel() {
