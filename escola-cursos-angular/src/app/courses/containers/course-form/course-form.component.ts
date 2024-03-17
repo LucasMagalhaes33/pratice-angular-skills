@@ -1,5 +1,12 @@
 import {Component} from '@angular/core';
-import {FormGroup, NonNullableFormBuilder, UntypedFormArray, Validators} from "@angular/forms";
+import {
+  FormGroup,
+  NonNullableFormBuilder,
+  UntypedFormArray,
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators
+} from "@angular/forms";
 import {CoursesService} from "../../services/courses.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Location} from "@angular/common";
@@ -27,9 +34,22 @@ export class CourseFormComponent {
         Validators.minLength(5),
         Validators.maxLength(100)]],
       category: [course.category, [Validators.required]],
-      lessons: this.formsBuilder.array(this.retrieveLessons(course))
+      lessons: this.formsBuilder
+        .array(this.retrieveLessons(course), Validators.required)
     });
 
+  }
+
+  validateAllFormFields(formGroup: UntypedFormGroup | UntypedFormArray) {
+    Object.keys(formGroup.controls).forEach(field => {
+      const control = formGroup.get(field);
+      if (control instanceof UntypedFormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof UntypedFormGroup || control instanceof UntypedFormArray) {
+        control.markAsTouched({ onlySelf: true });
+        this.validateAllFormFields(control);
+      }
+    });
   }
 
   private retrieveLessons(course: Course) {
@@ -49,8 +69,12 @@ export class CourseFormComponent {
   private createLesson(lesson: Lesson = {id: '', name: '', youtubeUrl: ''}) {
     return this.formsBuilder.group({
       id: [lesson.id],
-      name: [lesson.name, [Validators.required]],
-      youtubeUrl: [lesson.youtubeUrl, [Validators.required]]
+      name: [lesson.name, [Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(100)]],
+      youtubeUrl: [lesson.youtubeUrl, [Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(200)]]
     });
   }
 
@@ -63,10 +87,14 @@ export class CourseFormComponent {
   }
 
   onSubmit() {
-    this.service.save(this.form.value)
-      .subscribe(data => this.onSuccess(),
-        error => this.onError());
-    this.onCancel();
+    if (this.form.valid) {
+      this.service.save(this.form.value)
+        .subscribe(data => this.onSuccess(),
+          error => this.onError());
+    } else {
+      alert('Formulário inválido')
+    }
+
   }
 
   private onError(){
@@ -81,7 +109,7 @@ export class CourseFormComponent {
 
   protected readonly name = name;
 
-  getErrorMessage(fieldName: string) {
+  getErrorMessage(formGroup: UntypedFormGroup, fieldName: string) {
     const field = this.form.get(fieldName);
 
     if (field?.hasError('required')) {
@@ -110,4 +138,5 @@ export class CourseFormComponent {
     const lessons = this.form.get('lessons') as UntypedFormArray;
     lessons.removeAt(index);
   }
+
 }
