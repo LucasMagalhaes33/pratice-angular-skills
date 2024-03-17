@@ -30,7 +30,8 @@ export class CourseFormComponent {
       _id: course._id,
       name: course.name,
       category: course.category
-    })
+    });
+    console.log(course);
   }
 
   protected readonly onsubmit = onsubmit;
