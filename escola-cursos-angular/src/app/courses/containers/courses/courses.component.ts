@@ -11,9 +11,10 @@ import {
 } from "../../../shared/components/confirmation-dialog/confirmation-dialog.component";
 
 @Component({
-  selector: 'app-courses',
-  templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.scss']
+    selector: 'app-courses',
+    templateUrl: './courses.component.html',
+    styleUrls: ['./courses.component.scss'],
+    standalone: true
 })
 export class CoursesComponent {
   courses$: Observable<Course[]> | null = null;

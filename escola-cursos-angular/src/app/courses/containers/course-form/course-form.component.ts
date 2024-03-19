@@ -15,9 +15,10 @@ import {Course} from "../../model/course";
 import {Lesson} from "../../model/lesson";
 
 @Component({
-  selector: 'app-course-form',
-  templateUrl: './course-form.component.html',
-  styleUrls: ['./course-form.component.scss']
+    selector: 'app-course-form',
+    templateUrl: './course-form.component.html',
+    styleUrls: ['./course-form.component.scss'],
+    standalone: true
 })
 export class CourseFormComponent {
 

@@ -6,11 +6,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 
 @Component({
-  selector: 'app-courses-list',
-  templateUrl: './courses-list.component.html',
-  styleUrls: ['./courses-list.component.scss'],
-  standalone: false,
-  imports: [MatTableModule, MatIconModule, MatButtonModule]
+    selector: 'app-courses-list',
+    templateUrl: './courses-list.component.html',
+    styleUrls: ['./courses-list.component.scss'],
+    standalone: false,
+    imports: [MatTableModule, MatIconModule, MatButtonModule],
+    standalone: true
 })
 export class CoursesListComponent implements OnInit {
 
