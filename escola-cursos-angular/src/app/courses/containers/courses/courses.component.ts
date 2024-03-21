@@ -9,12 +9,25 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {
   ConfirmationDialogComponent
 } from "../../../shared/components/confirmation-dialog/confirmation-dialog.component";
+import {MatCard} from "@angular/material/card";
+import {MatToolbar} from "@angular/material/toolbar";
+import {CoursesListComponent} from "../../components/courses-list/courses-list.component";
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
+import {AsyncPipe, NgIf} from "@angular/common";
 
 @Component({
-    selector: 'app-courses',
-    templateUrl: './courses.component.html',
-    styleUrls: ['./courses.component.scss'],
-    standalone: true
+  selector: 'app-courses',
+  templateUrl: './courses.component.html',
+  styleUrls: ['./courses.component.scss'],
+  imports: [
+    MatCard,
+    MatToolbar,
+    CoursesListComponent,
+    MatProgressSpinner,
+    AsyncPipe,
+    NgIf
+  ],
+  standalone: true
 })
 export class CoursesComponent {
   courses$: Observable<Course[]> | null = null;

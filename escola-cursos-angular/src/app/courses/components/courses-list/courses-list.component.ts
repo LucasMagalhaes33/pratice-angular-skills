@@ -1,17 +1,19 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { Course } from '../../model/course';
+import { CategoryPipe } from '../../../shared/pipe/category.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import {SharedModule} from "../../../shared/shared.module";
+import {CommonModule, NgIf} from "@angular/common";
 
 @Component({
-    selector: 'app-courses-list',
-    templateUrl: './courses-list.component.html',
-    styleUrls: ['./courses-list.component.scss'],
-    standalone: false,
-    imports: [MatTableModule, MatIconModule, MatButtonModule],
-    standalone: true
+  selector: 'app-courses-list',
+  templateUrl: './courses-list.component.html',
+  styleUrls: ['./courses-list.component.scss'],
+  standalone: true,
+  imports: [MatTableModule, MatIconModule, MatButtonModule, SharedModule, CommonModule, NgIf  ]
 })
 export class CoursesListComponent implements OnInit {
 

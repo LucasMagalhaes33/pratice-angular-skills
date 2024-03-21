@@ -11,11 +11,11 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
   declarations: [
     ErrorDialogComponent,
     CategoryPipe,
-    ConfirmationDialogComponent
   ],
   imports: [
     CommonModule,
-    MatButtonModule
+    MatButtonModule,
+    ConfirmationDialogComponent
 ],
   exports: [
     ErrorDialogComponent,
